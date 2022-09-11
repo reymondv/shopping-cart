@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
+import { useShoppingCart } from '../context/ShoppingCartContext';
 
 type Props = {};
 
@@ -10,6 +11,7 @@ const Navbar = (props: Props) => {
   const toggleOption = () => {
     setOption(!isOption);
   };
+  const { openCart, cartQuantity } = useShoppingCart();
   return (
     <>
       <nav className='bg-gray-800'>
@@ -89,12 +91,13 @@ const Navbar = (props: Props) => {
             </div>
             <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
               <button
+                onClick={openCart}
                 type='button'
                 className='rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white text-2xl'>
-                <span className='sr-only'>View notifications</span>
+                <span className='sr-only'>Cart</span>
                 <FaShoppingCart />
                 <div className='rounded-full bg-red-600 flex justify-center items-center text-sm text-white absolute bottom-3 right-[40px] w-4 h-4'>
-                  3
+                  {cartQuantity}
                 </div>
               </button>
               <div className='relative ml-3'>
