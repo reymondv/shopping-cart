@@ -1,0 +1,37 @@
+[{
+        "id": 1,
+        "name": "Book",
+        "price": 10.99,
+        "imgUrl": "https://images.unsplash.com/photo-1576689560324-1b8748a830be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+    },
+    {
+        "id": 2,
+        "name": "Laptop",
+        "price": 1200,
+        "imgUrl": "https://images.unsplash.com/photo-1577375729152-4c8b5fcda381?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+    },
+    {
+        "id": 3,
+        "name": "Keyboard",
+        "price": 25.20,
+        "imgUrl": "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+    },
+    {
+        "id": 4,
+        "name": "Mouse",
+        "price": 50.00,
+        "imgUrl": "https://images.unsplash.com/photo-1660491083562-d91a64d6ea9c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=881&q=80"
+    },
+    {
+        "id": 5,
+        "name": "Monitor",
+        "price": 878,
+        "imgUrl": "https://images.unsplash.com/photo-1570485071395-29b575ea3b4e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+    },
+    {
+        "id": 6,
+        "name": "Spaghetti",
+        "price": 8.40,
+        "imgUrl": "https://images.unsplash.com/photo-1595295333158-4742f28fbd85?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+    }
+]
