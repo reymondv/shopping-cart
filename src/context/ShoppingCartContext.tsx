@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode, useState, createContext, useContext } from 'react';
 
 type ShoppingCartProviderProps = {
   children: ReactNode;
@@ -21,16 +21,15 @@ type ShoppingCartContextProps = {
   cartItems: CartItem[];
 };
 
-const ShoppingCartContext = React.createContext({} as ShoppingCartContextProps);
+const ShoppingCartContext = createContext({} as ShoppingCartContextProps);
 
 const useShoppingCart = () => {
-  return React.useContext(ShoppingCartContext);
+  return useContext(ShoppingCartContext);
 };
 
 const ShoppingCartProvider = ({ children }: ShoppingCartProviderProps) => {
-  const [toggleCart, setCart] = React.useState<boolean>(false);
-  const [cartItems, setCartItems] = React.useState<CartItem[]>([]);
-  const [tempItems, setTempItems] = React.useState<CartItem[]>([]);
+  const [toggleCart, setCart] = useState<boolean>(false);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   const openCart = () => setCart(true);
   const closeCart = () => setCart(false);
@@ -52,39 +51,6 @@ const ShoppingCartProvider = ({ children }: ShoppingCartProviderProps) => {
         return currItems.map((item) => {
           if (item.id === id) {
             return { ...item, quantity: item.quantity + quantity };
-          } else {
-            return item;
-          }
-        });
-      }
-    });
-  };
-
-  const increaseCartQuantity = (id: number) => {
-    setCartItems((currItems) => {
-      if (currItems.find((item) => item.id === id) == null) {
-        return [...currItems, { id, quantity: 1 }];
-      } else {
-        return currItems.map((item) => {
-          if (item.id === id) {
-            return { ...item, quantity: item.quantity + 1 };
-          } else {
-            return item;
-          }
-        });
-      }
-    });
-  };
-  // console.log('Cart Items', cartItems);
-  console.log('Temp Items', tempItems);
-  const decreaseCartQuantity = (id: number) => {
-    setCartItems((currItems) => {
-      if (currItems.find((item) => item.id === id)?.quantity === 1) {
-        return currItems.filter((item) => item.id !== id);
-      } else {
-        return currItems.map((item) => {
-          if (item.id === id) {
-            return { ...item, quantity: item.quantity - 1 };
           } else {
             return item;
           }

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 import { useShoppingCart } from '../context/ShoppingCartContext';
@@ -7,11 +7,9 @@ import { motion } from 'framer-motion';
 import items from '../data/data.json';
 import formatCurrency from '../utilities/formatCurrency';
 
-type Props = {};
-
-const Navbar = (props: Props) => {
-  const [isOption, setOption] = React.useState<boolean>(false);
-  const [isCartOpen, setCartOpen] = React.useState<boolean>(false);
+const Navbar = () => {
+  const [isOption, setOption] = useState<boolean>(false);
+  const [isCartOpen, setCartOpen] = useState<boolean>(false);
 
   const toggleOption = () => {
     setOption(!isOption);

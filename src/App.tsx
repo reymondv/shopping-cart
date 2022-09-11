@@ -6,9 +6,7 @@ import About from './pages/About';
 import Navbar from './components/Navbar';
 import { ShoppingCartProvider } from './context/ShoppingCartContext';
 
-type Props = {};
-
-const App = (props: Props) => {
+const App = () => {
   return (
     <>
       <ShoppingCartProvider>

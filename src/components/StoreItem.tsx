@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { useShoppingCart } from '../context/ShoppingCartContext';
 import formatCurrency from '../utilities/formatCurrency';
 
@@ -14,9 +14,8 @@ const StoreItem = ({ id, name, price, imgUrl }: StoreItemProps) => {
 
   // const quantity = getItemQuantity(id);
 
-  const [isAddToCartClicked, setAddToCardClicked] =
-    React.useState<boolean>(false);
-  const [itemCount, setItemCount] = React.useState<number>(0);
+  const [isAddToCartClicked, setAddToCardClicked] = useState<boolean>(false);
+  const [itemCount, setItemCount] = useState<number>(0);
 
   const incItemCount = () => {
     itemCount >= 0 && setItemCount((current) => current + 1);
