@@ -1,20 +1,29 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 import { useShoppingCart } from '../context/ShoppingCartContext';
+import { motion } from 'framer-motion';
+import items from '../data/data.json';
+import formatCurrency from '../utilities/formatCurrency';
 
 type Props = {};
 
 const Navbar = (props: Props) => {
   const [isOption, setOption] = React.useState<boolean>(false);
+  const [isCartOpen, setCartOpen] = React.useState<boolean>(false);
 
   const toggleOption = () => {
     setOption(!isOption);
   };
-  const { openCart, cartQuantity } = useShoppingCart();
+
+  const toggleCart = () => {
+    setCartOpen(!isCartOpen);
+  };
+  const { openCart, cartQuantity, cartItems } = useShoppingCart();
   return (
     <>
-      <nav className='bg-gray-800'>
+      <nav className='bg-gray-800 fixed w-full'>
         <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
           <div className='relative flex h-16 items-center justify-between'>
             <div className='absolute inset-y-0 left-0 flex items-center sm:hidden'>
@@ -56,16 +65,20 @@ const Navbar = (props: Props) => {
             </div>
             <div className='flex flex-1 items-center justify-center sm:items-stretch sm:justify-start'>
               <div className='flex flex-shrink-0 items-center'>
-                <img
-                  className='block h-8 w-auto lg:hidden'
-                  src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500'
-                  alt='Your Company'
-                />
-                <img
-                  className='hidden h-8 w-auto lg:block'
-                  src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500'
-                  alt='Your Company'
-                />
+                <Link to='/'>
+                  <img
+                    className='block h-8 w-auto lg:hidden'
+                    src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500'
+                    alt='Shopping Cart'
+                  />
+                </Link>
+                <Link to='/'>
+                  <img
+                    className='hidden h-8 w-auto lg:block'
+                    src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500'
+                    alt='Shopping Cart'
+                  />
+                </Link>
               </div>
               <div className='hidden sm:ml-6 sm:block'>
                 <div className='flex space-x-4'>
@@ -90,16 +103,54 @@ const Navbar = (props: Props) => {
               </div>
             </div>
             <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
-              <button
-                onClick={openCart}
-                type='button'
-                className='rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white text-2xl'>
-                <span className='sr-only'>Cart</span>
-                <FaShoppingCart />
-                <div className='rounded-full bg-red-600 flex justify-center items-center text-sm text-white absolute bottom-3 right-[40px] w-4 h-4'>
-                  {cartQuantity}
-                </div>
-              </button>
+              <div className='relative ml-3'>
+                <button
+                  onClick={toggleCart}
+                  type='button'
+                  className='rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white text-2xl'>
+                  <span className='sr-only'>Cart</span>
+                  <FaShoppingCart />
+                  <div className='rounded-full bg-red-600 flex justify-center items-center text-sm text-white absolute bottom-0 right-[-5px] w-4 h-4'>
+                    {cartQuantity}
+                  </div>
+                </button>
+                {isCartOpen && (
+                  <motion.aside
+                    className='fixed right-0 z-10 mt-[0.95rem] w-[30%] h-[100vh] origin-top-right bg-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none shadow-xl '
+                    role='menu'
+                    aria-labelledby='user-menu-button'
+                    tabIndex={-1}
+                    initial={{ width: 0 }}
+                    animate={{ width: 500 }}>
+                    <div>
+                      {cartItems.map((data, idx) => (
+                        <div className='container pt-5 px-5 flex flex-row'>
+                          <img
+                            className='w-20 rounded-md'
+                            src={items[data.id - 1].imgUrl}
+                            alt={items[data.id - 1].name}
+                          />
+                          <div className='flex justify-between container'>
+                            <div className='flex flex-col ml-5 justify-center'>
+                              <span className='text-lg'>
+                                {items[data.id - 1].name}
+                              </span>
+                              <span className='text-md'>{data.quantity}x</span>
+                            </div>
+                            <div className='flex justify-center flex-col mx-5'>
+                              <span className='text-lg font-semibold'>
+                                {formatCurrency(
+                                  items[data.id - 1].price * data.quantity
+                                )}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.aside>
+                )}
+              </div>
               <div className='relative ml-3'>
                 <div>
                   <button

@@ -56,7 +56,7 @@ const StoreItem = ({ id, name, price, imgUrl }: StoreItemProps) => {
                 setItemCount((current) => (current = 0));
               }}
               className='w-full py-2 mt-3 bg-red-500 rounded-md text-white font-bold'>
-              Remove from cart
+              Remove from cart &#x5b;{getItemQuantity(id)}&#x5d;
             </button>
           ) : !isAddToCartClicked && itemCount === 0 ? (
             <button
